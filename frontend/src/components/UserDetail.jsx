@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { usersAtom, userLoadingAtom, userErrorAtom } from '../store/atoms';
+import { Input, Checkbox, Button, Spin, Alert } from 'antd';
 
 function UserDetail() {
-  const [user, setUser] = useState(null);
+  // 컴포넌트 정의
+  const [user, setUser] = useAtom(usersAtom);
+  const [loading, setLoading] = useAtom(userLoadingAtom);
+  const [error, setError] = useAtom(userErrorAtom);
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // 사용자 데이터 가져오기
   useEffect(() => {
     const fetchUser = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`/api/users/${id}`);
         if (!response.ok) {
@@ -17,45 +25,71 @@ function UserDetail() {
         setUser(data);
       } catch (error) {
         console.error('Error fetching user:', error);
-        // 에러 상태를 설정하거나 사용자에게 알림을 표시할 수 있습니다.
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUser();
-  }, [id]);
+  }, [id, setUser, setLoading, setError]);
 
-  const handleSave = () => {
-    // API를 통해 사용자 정보 업데이트
-    fetch(`/api/users/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-    }).then(() => navigate('/users'));
-  };
-
-  const handleDelete = () => {
-    if (window.confirm('정말로 이 사용자를 삭제하시겠습니까?')) {
-      fetch(`/api/users/${id}`, { method: 'DELETE' })
-        .then(() => navigate('/users'));
+  // 사용자 정보 업데이트
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/users/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      });
+      if (!response.ok) {
+        throw new Error('사용자 정보 업데이트에 실패했습니다');
+      }
+      console.log('사용자 정보 업데이트 성공');
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!user) return <div>로딩 중...</div>;
+  const handleDelete = async () => {
+    if (window.confirm('정말로 이 사용자를 삭제하시겠습니까?')) {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/users/${id}`, { method: 'DELETE' });
+        if (!response.ok) {
+          throw new Error('사용자 삭제에 실패했습니다');
+        }
+        console.log('사용자 삭제 성공');
+        navigate('/');
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  if (loading) return <Spin size="large" />;
+  if (error) return <Alert message="에러" description={error} type="error" />;
+  if (!user) return <Alert message="사용자를 찾을 수 없습니다." type="warning" />;
 
   return (
     <div className="user-detail">
       <h2>사용자 정보</h2>
       <div>
         <label>이름: </label>
-        <input
-          type="text"
+        <Input
           value={user.name}
           onChange={e => setUser({...user, name: e.target.value})}
         />
       </div>
       <div>
         <label>이메일: </label>
-        <input
+        <Input
           type="email"
           value={user.email}
           onChange={e => setUser({...user, email: e.target.value})}
@@ -63,24 +97,13 @@ function UserDetail() {
       </div>
       <div>
         <label>활성 상태: </label>
-        <input
-          type="checkbox"
+        <Checkbox
           checked={user.isActive}
           onChange={e => setUser({...user, isActive: e.target.checked})}
         />
-        {user.isActive && <span style={{color: 'green'}}>활성</span>}
       </div>
-      <div>
-        <label>관리자 여부: </label>
-        <input
-          type="checkbox"
-          checked={user.isAdmin}
-          onChange={e => setUser({...user, isAdmin: e.target.checked})}
-        />
-        {user.isAdmin && <span style={{color: 'blue'}}>관리자</span>}
-      </div>
-      <button onClick={handleSave}>저장</button>
-      <button onClick={handleDelete}>삭제</button>
+      <Button type="primary" onClick={handleSave}>저장</Button>
+      <Button danger onClick={handleDelete}>삭제</Button>
     </div>
   );
 }

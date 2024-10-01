@@ -8,6 +8,12 @@ function UserList({ users }) {
     navigate(`/${userId}`);
   };
 
+  // users가 배열인지 확인
+  if (!Array.isArray(users)) {
+    console.error('Users is not an array:', users);
+    return <div>사용자 목록을 불러오는 중 오류가 발생했습니다.</div>;
+  }
+
   return (
     <table className="user-list">
       <thead>

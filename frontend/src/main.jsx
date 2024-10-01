@@ -2,7 +2,7 @@
 import React from 'react' 
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx' 
-import './styles/index.css' 
+import './styles/index.css'
 
 // 개발 환경에서 모의 서버 활성화 함수
 async function enableMocking() {
