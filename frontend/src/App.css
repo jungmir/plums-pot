@@ -1,42 +1,34 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 500;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.ant-menu-item-selected {
+  background-color: #4f6f52 !important;
+  color: #fff !important;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.custom-table .ant-table-thead > tr > th {
+  background-color: #e1ecdc;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.ant-btn:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-btn-default {
+  /* background-color: #86a789; */
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.ant-btn-default:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
 }
-
-.card {
-  padding: 2em;
+.ant-select:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
 }
-
-.read-the-docs {
-  color: #888;
+.primary--color {
+  color: #4f6f52 !important;
+}
+.secondary--color {
+  color: #86a789 !important;
 }
