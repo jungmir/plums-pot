@@ -1,0 +1,40 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "김민우",
+        "email": "mwkim.intern@ahnlab.com",
+        "isActive": true,
+        "isAdmin": false
+      },
+      {
+        "id": 2,
+        "name": "양소영",
+        "email": "sysang@ahnlab.com",
+        "isActive": false,
+        "isAdmin" : false
+      },
+      {
+        "id": 3,
+        "name": "송예진",
+        "email": "yjsong@ahnlab.com",
+        "isActive": true,    
+        "isAdmin" : false
+      },
+      {
+        "id": 4,
+        "name": "정미르",
+        "email": "mirjung@ahnlab.com",
+        "isActive": false,
+        "isAdmin" : true
+      },
+
+      {
+        "id": 5,
+        "name": "김영걸",
+        "email": "yongkim@ahnlab.com",
+        "isActive": false,
+        "isAdmin" : true
+      }
+    ]
+  }
