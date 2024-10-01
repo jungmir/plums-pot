@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Input, Select, Card, Flex, Typography, Button, Row, Col, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { usersAtom } from '../store/atoms';
 
 const UserListPage = () => {
   const navigate = useNavigate();
@@ -14,9 +16,11 @@ const UserListPage = () => {
     { title: 'IsActive', dataIndex: 'isActive', key: 'isActive', sorter: (a, b) => a.isActive - b.isActive, render: (text) => text ? 'Active' : 'Inactive' },
   ];
 
+  const [data, setData] = useAtom(usersAtom);
+
   const [searchOption, setSearchOption] = useState('Name');
   const [searchValue, setSearchValue] = useState('');
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
   const [loading, setLoading] = useState(true);
 
