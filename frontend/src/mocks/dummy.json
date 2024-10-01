@@ -2,97 +2,97 @@
     "users": [
         { 
             "id": 1, 
-            "name": "Giacomo Guilizzoni", 
+            "name": "Giacomo", 
             "email": "giacomo@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         },
         { 
             "id": 2, 
-            "name": "Marco Botton", 
+            "name": "Marco", 
             "email": "marco@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": false,
             "isAdmin": false
         },
         { 
             "id": 3, 
-            "name": "Mariah Maclachlan", 
+            "name": "Mariah", 
             "email": "mariah@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": true
         },
         { 
             "id": 4, 
-            "name": "Valerie Liberty", 
+            "name": "Valerie", 
             "email": "valerie@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         },
         { 
             "id": 5, 
-            "name": "Giacomo Guilizzoni", 
+            "name": "Guilizoni", 
             "email": "giacomo@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         },
         { 
             "id": 6, 
-            "name": "Marco Botton", 
+            "name": "Botton", 
             "email": "marco@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": false,
             "isAdmin": false
         },
         { 
             "id": 7, 
-            "name": "Mariah Maclachlan", 
+            "name": "Maclachan", 
             "email": "mariah@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": true
         },
         { 
             "id": 8, 
-            "name": "Valerie Liberty", 
+            "name": "berty", 
             "email": "valerie@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         },
         { 
             "id": 9, 
-            "name": "Giacomo Guilizzoni", 
+            "name": "Giacom", 
             "email": "giacomo@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         },
         { 
             "id": 10, 
-            "name": "Marco Botton", 
+            "name": "Marton", 
             "email": "marco@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": false,
             "isAdmin": false
         },
         { 
             "id": 11, 
-            "name": "Mariah Maclachlan", 
+            "name": "Marchlan", 
             "email": "mariah@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": true
         },
         { 
             "id": 12, 
-            "name": "Valerie Liberty", 
+            "name": "Valrty", 
             "email": "valerie@wire.com", 
-            "password": "1234",
+            "password": "a12345678!",
             "isActive": true,
             "isAdmin": false
         }

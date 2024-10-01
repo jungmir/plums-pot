@@ -57,6 +57,7 @@ const EditUserPage = () => {
                 initialValues={{
                     name: user.name,
                     email: user.email,
+                    password: user.password,
                     isActive: user.isActive,
                     isAdmin: user.isAdmin,
                 }}
@@ -82,6 +83,22 @@ const EditUserPage = () => {
                 >
                     <Input placeholder="사용자 이메일" style={{height: '40px'}} />
                 </Form.Item>
+
+                <Form.Item
+                    label="비밀번호"
+                    name="password"
+                    style={{ fontSize: '9px' }}
+                    rules={[
+                        { required: true, message: '비밀번호를 입력해주세요.' },
+                        { 
+                            pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/, 
+                            message: '문자, 숫자, 특수문자를 포함한 8~16자로 입력해주세요.' 
+                        }
+                    ]}
+                >
+                    <Input.Password placeholder="비밀번호" style={{height: '40px'}} />
+                </Form.Item>
+
         
                 <Form.Item label="isActive" name="isActive" valuePropName="checked">
                     <Switch className="custom-switch" />

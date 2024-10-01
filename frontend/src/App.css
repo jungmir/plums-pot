@@ -12,13 +12,15 @@
 .custom-table .ant-table-thead > tr > th {
   background-color: #e1ecdc;
 }
-.ant-input.ant-input-status-error:hover,
-.ant-input.ant-input-status-error:focus {
-  border-color: #ff4d4f !important;
+
+.ant-form-item-explain-error {
+  font-size: 11px;
 }
 
 .ant-input:hover, 
 .ant-input:focus,
+/* .ant-input-status-success, */
+.ant-input-affix-wrapper:focus,
 .custom-table .ant-pagination-item,
 .custom-select .ant-select-selector,
 .custom-select .ant-select-selector:hover,
@@ -27,7 +29,10 @@
   border-color: #4f6f52 !important;
   box-shadow: none;
 }
-
+.ant-input.ant-input-status-error:hover,
+.ant-input.ant-input-status-error:focus {
+  border-color: #ff4d4f !important;
+}
 .custom-table .ant-pagination-item {
   color:#4f6f52;
 }
