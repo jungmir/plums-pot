@@ -11,20 +11,28 @@
 .custom-table .ant-table-thead > tr > th {
   background-color: #e1ecdc;
 }
-.ant-input:hover, .ant-input:focus {
-  border-color: #4f6f52 !important;
-}
 .ant-input.ant-input-status-error:hover,
 .ant-input.ant-input-status-error:focus {
   border-color: #ff4d4f !important;
 }
 
+.ant-input:hover, 
+.ant-input:focus,
+.custom-table .ant-pagination-item,
+.custom-select .ant-select-selector,
+.custom-select .ant-select-selector:hover,
+.custom-select .ant-select-selector:focus,
+.custom-select .ant-select-focused .ant-select-selector {
+  border-color: #4f6f52 !important;
+  box-shadow: none;
+}
+
+.custom-table .ant-pagination-item {
+  color:#4f6f52;
+}
 .ant-btn:hover {
   color: #4f6f52 !important;
   border-color: #4f6f52 !important;
-}
-.ant-btn-default {
-  /* background-color: #86a789; */
 }
 .ant-btn-primary {
   background-color: #4f6f52;
