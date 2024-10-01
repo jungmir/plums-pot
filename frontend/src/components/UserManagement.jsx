@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { usersAtom, userLoadingAtom, userErrorAtom } from '../store/atoms';
+import { usersAtom, userErrorAtom } from '../store/atoms';
 import UserList from './UserList';
 import { useLocation } from 'react-router-dom';
 import { Typography, Spin, Alert, Card } from 'antd';
@@ -9,12 +9,10 @@ const { Title } = Typography;
 
 function UserManagement() {
   const [users, setUsers] = useAtom(usersAtom);
-  const [loading, setLoading] = useAtom(userLoadingAtom);
   const [error, setError] = useAtom(userErrorAtom);
   const location = useLocation();
 
   const fetchUsers = async () => {
-    setLoading(true);
     try {
       const response = await fetch('/api/users');
       if (!response.ok) {
@@ -26,7 +24,6 @@ function UserManagement() {
       console.error('Error fetching users:', error);
       setError(error.message);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -34,7 +31,6 @@ function UserManagement() {
     fetchUsers();
   }, [location.pathname]);
 
-  if (loading) return <Spin size="large" />;
   if (error) return <Alert message="에러" description={error} type="error" />;
 
   return (
