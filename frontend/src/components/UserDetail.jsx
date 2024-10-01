@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { usersAtom, userLoadingAtom, userErrorAtom } from '../store/atoms';
+import { usersAtom, userErrorAtom } from '../store/atoms';
 import { Input, Checkbox, Button, Spin, Alert } from 'antd';
 
 function UserDetail() {
   // 컴포넌트 정의
   const [user, setUser] = useAtom(usersAtom);
-  const [loading, setLoading] = useAtom(userLoadingAtom);
   const [error, setError] = useAtom(userErrorAtom);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ function UserDetail() {
   // 사용자 데이터 가져오기
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
       try {
         const response = await fetch(`/api/users/${id}`);
         if (!response.ok) {
@@ -27,16 +25,14 @@ function UserDetail() {
         console.error('Error fetching user:', error);
         setError(error.message);
       } finally {
-        setLoading(false);
       }
     };
 
     fetchUser();
-  }, [id, setUser, setLoading, setError]);
+  }, [id, setUser, setError]);
 
   // 사용자 정보 업데이트
   const handleSave = async () => {
-    setLoading(true);
     try {
       const response = await fetch(`/api/users/${id}`, {
         method: 'PUT',
@@ -50,14 +46,11 @@ function UserDetail() {
       navigate('/');
     } catch (error) {
       setError(error.message);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   const handleDelete = async () => {
     if (window.confirm('정말로 이 사용자를 삭제하시겠습니까?')) {
-      setLoading(true);
       try {
         const response = await fetch(`/api/users/${id}`, { method: 'DELETE' });
         if (!response.ok) {
@@ -68,12 +61,10 @@ function UserDetail() {
       } catch (error) {
         setError(error.message);
       } finally {
-        setLoading(false);
       }
     }
   };
 
-  if (loading) return <Spin size="large" />;
   if (error) return <Alert message="에러" description={error} type="error" />;
   if (!user) return <Alert message="사용자를 찾을 수 없습니다." type="warning" />;
 
@@ -99,6 +90,13 @@ function UserDetail() {
         <label>활성 상태: </label>
         <Checkbox
           checked={user.isActive}
+          onChange={e => setUser({...user, isActive: e.target.checked})}
+        />
+      </div>
+      <div>
+        <label>관리자 상태: </label>
+        <Checkbox
+          checked={user.isAdmin}
           onChange={e => setUser({...user, isActive: e.target.checked})}
         />
       </div>
