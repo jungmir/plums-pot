@@ -1,40 +1,47 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Table, Tag } from 'antd';
 
 function UserList({ users }) {
   const navigate = useNavigate();
 
-  const handleRowClick = (userId) => {
-    navigate(`/${userId}`);
-  };
-
-  // users가 배열인지 확인
-  if (!Array.isArray(users)) {
-    console.error('Users is not an array:', users);
-    return <div>사용자 목록을 불러오는 중 오류가 발생했습니다.</div>;
-  }
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: '이름',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '이메일',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: '활성 상태',
+      dataIndex: 'isActive',
+      key: 'isActive',
+      render: isActive => (
+        <Tag color={isActive ? 'green' : 'red'}>
+          {isActive ? '활성' : '비활성'}
+        </Tag>
+      ),
+    },
+  ];
 
   return (
-    <table className="user-list">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>이름</th>
-          <th>이메일</th>
-          <th>활성 상태</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map(user => (
-          <tr key={user.id} onClick={() => handleRowClick(user.id)} style={{cursor: 'pointer'}}>
-            <td>{user.id}</td>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.isActive ? '활성' : '비활성'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table 
+      columns={columns} 
+      dataSource={Array.isArray(users) ? users : []} 
+      rowKey="id"
+      onRow={(record) => ({
+        onClick: () => navigate(`/${record.id}`),
+      })}
+    />
   );
 }
 
