@@ -16,12 +16,12 @@ const UserListPage = () => {
 
   const [searchOption, setSearchOption] = useState('Name');
   const [searchValue, setSearchValue] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
   const [loading, setLoading] = useState(true);
 
   const handleSelectChange = (value) => {
     setSearchOption(value);
-    setSearchValue('');
   }
 
   const handleInputChange = (e) => {
@@ -29,6 +29,10 @@ const UserListPage = () => {
   }
 
   const handleSearch = () => {
+    if (searchValue === "") {
+      setFilteredData(data);
+      return;
+    }
     const filtered = filteredData.filter((item) => {
         if (searchOption === 'Name') {
           return item.name.toLowerCase().includes(searchValue.toLowerCase());
@@ -52,6 +56,7 @@ const UserListPage = () => {
           url: "/users/all"
         });
         setFilteredData(res.data);
+        setData(res.data);
       } catch (error) {
         console.log(error);
       } finally {
@@ -62,7 +67,7 @@ const UserListPage = () => {
   }, []);
 
   if (loading) return <Spin />;
-  
+
   return (
     <div style={{ flex: 1 }}>
     <Card>

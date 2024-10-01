@@ -1,4 +1,4 @@
-import { Form, Input, Switch, Button, Typography, Card, Row, Col } from 'antd';
+import { Form, Input, Switch, Button, Typography, Card, Row, Col, message } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
   
@@ -8,6 +8,7 @@ const AddUserPage = () => {
         try {
             const res = await axios.post('/users', userData);
             console.log(res);
+            message.success('추가가 완료되었습니다.');
             navigate('/');
         } catch (error) {
             console.error(error);

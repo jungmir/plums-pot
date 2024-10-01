@@ -1,4 +1,4 @@
-import { Card, Row, Col, Typography, Button, Spin, Switch } from 'antd'
+import { Card, Row, Col, Typography, Button, Spin, Switch, Modal, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
@@ -11,10 +11,25 @@ const UserPage = () => {
     const [loading, setLoading] = useState(true);
 
     const handleEdit = () => {
-
+        navigate(`/users/edit/${id}`);
     }
     const handleDelete = () => {
-
+        Modal.confirm({
+            title: '정말 삭제하시겠습니까?',
+            content: '이 작업은 되돌릴 수 없습니다.',
+            okText: '삭제',
+            okType: 'default',
+            centered: true,
+            onOk: async () => {
+                try {
+                    await axios.delete(`/users/${id}`);
+                    message.success('삭제가 완료되었습니다.');
+                    navigate('/');
+                } catch (error) {
+                    console.error(error);
+                }
+            },
+        });
     }
 
     useEffect(() => {
