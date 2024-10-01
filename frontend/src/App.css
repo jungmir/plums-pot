@@ -8,6 +8,7 @@
   background-color: #4f6f52 !important;
   color: #fff !important;
 }
+.custom-select .ant-select-open,
 .custom-table .ant-table-thead > tr > th {
   background-color: #e1ecdc;
 }

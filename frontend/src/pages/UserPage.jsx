@@ -1,125 +1,88 @@
-import { useState, useEffect } from 'react';
+import { Card, Row, Col, Typography, Button, Spin, Switch } from 'antd'
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, Input, Select, Card, Flex, Typography, Button, Row, Col } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
-  const navigate = useNavigate();
-  const { Option } = Select;
+    const navigate = useNavigate();
+    const {id} = useParams();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  const columns = [
-    { title: 'ID', dataIndex: 'id', key: 'id' },
-    { title: 'Name', dataIndex: 'name', key: 'name' },
-    { title: 'Email', dataIndex: 'email', key: 'email' },
-    { title: 'IsActive', dataIndex: 'isActive', key: 'isActive' },
-  ];
+    const handleEdit = () => {
 
-  const [searchOption, setSearchOption] = useState('Name');
-  const [searchValue, setSearchValue] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-
-  const handleSelectChange = (value) => {
-    setSearchOption(value);
-    setSearchValue('');
-  }
-
-  const handleInputChange = (e) => {
-    setSearchValue(e.target.value);
-  }
-
-  const handleSearch = () => {
-    const filtered = filteredData.filter((item) => {
-        if (searchOption === 'Name') {
-          return item.name.toLowerCase().includes(searchValue.toLowerCase());
-        } else if (searchOption === 'Email') {
-          return item.email.toLowerCase().includes(searchValue.toLowerCase());
-        }
-        return false;
-    });
-    setFilteredData(filtered);
-  }
-
-  const handleRowClick = (record) => {
-    console.log('test', record);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios({
-          method: "get",
-          url: "/users/all"
-        });
-        console.log(res)
-        setFilteredData(res.data);
-      } catch (error) {
-        console.log(error);
-      }
     }
-    fetchData();
-  }, []);
+    const handleDelete = () => {
 
-  return (
-    <div style={{ flex: 1 }}>
-    <Card>
-        {/* 화면 상단 */}
-        <Row justify="space-between">
-            <Col>
-                <Typography.Title 
-                    level={5} 
-                    style={{marginBottom: '30px'}}
-                >
-                    USER LIST
-                </Typography.Title>
-            </Col>
-            <Col>
-                <Button 
-                    onClick={() => navigate('/add-user')}
-                >
-                    Add
-                </Button>
-            </Col>
-        </Row>
-        {/* 검색 기능 */}
-        <Flex>
-            <div 
-                style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}
-            >
-                <Select 
-                    defaultValue="Name" 
-                    className="custom-select" 
-                    onChange={handleSelectChange} 
-                    style={{ width: 120 }}
-                >
-                    <Option value="Name">Name</Option>
-                    <Option value="Email">Email</Option>
-                </Select>
-            <Input.Search 
-                onChange={handleInputChange} 
-                onSearch={handleSearch} 
-                style={{ width: 200, marginLeft: '16px' }} 
-                placeholder="Search" 
-            />
-            </div>
-        </Flex>
-        {/* 유저 목록 테이블 */}
-        <Flex>
-            <Table
-                className='custom-table'
-                columns={columns}
-                dataSource={filteredData.map((item) => ({ ...item, key: item.id }))}
-                pagination={{ position: ['bottomCenter'], pageSize: 10, }}
-                style={{ width: '100%' }}
-                onRow={(record) => ({
-                    onClick: () => handleRowClick(record),
-                    style: { cursor: 'pointer' },
-                })}
-            />
-        </Flex>
-    </Card>
+    }
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await axios({
+                    method: "get",
+                    url: `/users/${id}`
+                });
+                setUser(res.data);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchUser();
+    }, [id])
+
+    if (loading) return <Spin />
+
+    return (
+        <Card style={{ padding: '30px' }}>
+            <Card style={{ padding: '10px', maxWidth: '400px', margin: '0 auto' }}>
+                {/* 상단 */}
+                <Row justify="space-between">
+                    <Col>
+                        <Typography.Title level={5} style={{ marginBottom: '20px' }}>USER DETAIL</Typography.Title>
+                    </Col>
+                    <Col>
+                        <Button style={{ width: '12px' }} onClick={() => navigate('/')}>X</Button>
+                    </Col>
+                </Row>
     
-    </div>
-  );
-};
+                <Card style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                    {/* 이름, 이메일 */}
+                    <UserOutlined style={{ fontSize: '68px', border: '1px solid', padding: '30px', borderRadius: '50%', marginBottom: '20px' }} />
+                    <Typography.Title level={4} style={{ marginBottom: 0 }}>{user.name}</Typography.Title>
+                    <Typography.Text>{user.email}</Typography.Text>
+                    
+                    {/* 스위치 */}
+                    <Row style={{ marginTop: '20px', alignItems: 'center', justifyContent: 'center' }}>
+                        <Col style={{ marginRight: '15px', width: '60px' }}>isActive</Col>
+                        <Col>
+                            <Switch className="custom-switch" checked={user.isActive} disabled />
+                        </Col>
+                    </Row>
+                    <Row style={{ marginTop: '6px', alignItems: 'center', justifyContent: 'center' }}>
+                        <Col style={{ marginRight: '15px', width: '60px' }}>isAdmin</Col>
+                        <Col>
+                            <Switch className="custom-switch" checked={user.isAdmin} disabled />
+                        </Col>
+                    </Row>
+
+                    {/* 수정, 삭제 버튼 */}
+                    <Row justify="center" style={{ marginTop: '40px' }}>
+                        <Col>
+                            <Button type="default" onClick={handleDelete}>삭제</Button>
+                        </Col>
+                        <Col>
+                            <Button type="primary" style={{ marginLeft: '10px' }} onClick={handleEdit}>수정</Button>
+                        </Col>
+                    </Row>
+                </Card>
+            </Card>
+        </Card>
+    );
+    
+}
 
 export default UserPage;

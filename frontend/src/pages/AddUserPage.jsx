@@ -1,11 +1,17 @@
 import { Form, Input, Switch, Button, Typography, Card, Row, Col } from 'antd';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
   
 const AddUserPage = () => {
     const navigate = useNavigate();
-    const onFinish = (values) => {
-      console.log('Received values:', values);
-      // 여기에 API 호출 등을 추가하여 사용자 추가 로직을 구현할 수 있습니다.
+    const onFinish = async (userData) => {
+        try {
+            const res = await axios.post('/users', userData);
+            console.log(res);
+            navigate('/');
+        } catch (error) {
+            console.error(error);
+        }
     };
   
     return (
