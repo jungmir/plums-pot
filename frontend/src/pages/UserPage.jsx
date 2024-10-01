@@ -1,6 +1,8 @@
 import { Table, Input, Select, Card, Flex, Typography, Button, Row, Col } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
+  const navigate = useNavigate();
   const { Option } = Select;
 
   const columns = [
@@ -18,7 +20,7 @@ const UserPage = () => {
   ];
 
   return (
-    <div style={{ flex: 1}}>
+    <div style={{ flex: 1 }}>
     <Card>
         <Row justify="space-between">
             <Col>
@@ -27,7 +29,7 @@ const UserPage = () => {
                 </Typography.Title>
             </Col>
             <Col>
-                <Button>Add</Button>
+                <Button onClick={() => navigate('/add-user')}>Add</Button>
             </Col>
         </Row>
         <Flex>

@@ -1,11 +1,12 @@
 import { Layout } from 'antd';
+import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
 import CustomHeader from './CustomHeader';
-import UserPage from '../pages/UserPage';
+//import UserPage from '../pages/UserPage';
 
 const { Content, Sider, Header } = Layout;
 
-const AppLayout = () => {
+const AppLayout = ({ children }) => {
   return (
     <Layout>
       <Sider 
@@ -27,11 +28,16 @@ const AppLayout = () => {
           <CustomHeader />
         </Header>
         <Content style={{margin: '24px 16px', padding: '20px'}}>
-          <UserPage />
+          {/* <UserPage /> */}
+          {children}
         </Content>
       </Layout>
     </Layout>
   );
+};
+
+AppLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AppLayout;

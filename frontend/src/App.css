@@ -11,12 +11,27 @@
 .custom-table .ant-table-thead > tr > th {
   background-color: #e1ecdc;
 }
+.ant-input:hover, .ant-input:focus {
+  border-color: #4f6f52 !important;
+}
+.ant-input.ant-input-status-error:hover,
+.ant-input.ant-input-status-error:focus {
+  border-color: #ff4d4f !important;
+}
+
 .ant-btn:hover {
   color: #4f6f52 !important;
   border-color: #4f6f52 !important;
 }
 .ant-btn-default {
   /* background-color: #86a789; */
+}
+.ant-btn-primary {
+  background-color: #4f6f52;
+}
+.ant-btn-primary:hover {
+  background-color: #fff !important;
+  color: #4f6f52 !important;
 }
 .ant-btn-default:hover {
   color: #4f6f52 !important;
@@ -26,6 +41,17 @@
   color: #4f6f52 !important;
   border-color: #4f6f52 !important;
 }
+.custom-switch {
+  background-color: #d9d9d9;
+}
+
+.custom-switch.ant-switch-checked {
+  background-color: #86a789;
+}
+.custom-switch.ant-switch-checked:hover {
+  background-color: #86a789 !important; 
+}
+
 .primary--color {
   color: #4f6f52 !important;
 }
