@@ -38,7 +38,10 @@ const AddUserPage = () => {
                 <Form.Item
                     label="이름"
                     name="name"
-                    rules={[{ required: true, message: '이름을 입력해주세요.' }]}
+                    rules={[
+                        { required: true, message: '이름을 입력해주세요.' },
+                        { max: 10, message: '10자 이하로 입력해주세요.'}
+                    ]}
                 >
                     <Input placeholder="사용자 이름" style={{height: '40px'}} />
                 </Form.Item>
