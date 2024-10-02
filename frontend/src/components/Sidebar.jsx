@@ -47,6 +47,7 @@ function Sidebar() {
 
   const handleMenuClick = (item) => {
     navigate(item.key);
+    window.location.reload(); // 강제 새로고침
   };
 
   return (

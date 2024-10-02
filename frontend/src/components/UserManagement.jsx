@@ -3,14 +3,17 @@ import { useAtom } from 'jotai';
 import { usersAtom, userErrorAtom } from '../store/atoms';
 import UserList from './UserList';
 import SearchBar from './SearchBar';
+import AddUserModal from './AddUserModal';
 import { useLocation } from 'react-router-dom';
-import { Typography, Alert, Card, Space } from 'antd';
+import { Typography, Alert, Card, Space, Button } from 'antd';
+import { UserAddOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
 function UserManagement() {
   const [users, setUsers] = useAtom(usersAtom);
   const [error, setError] = useAtom(userErrorAtom);
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const location = useLocation();
   const [searchType, setSearchType] = useState('name');
   const [searchTerm, setSearchTerm] = useState('');
@@ -47,7 +50,16 @@ function UserManagement() {
   return (
     <Card>
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Title level={2}>사용자 관리</Title>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Title level={2}>사용자 관리</Title>
+          <Button 
+            type="primary" 
+            icon={<UserAddOutlined />} 
+            onClick={() => setIsAddUserModalOpen(true)}
+          >
+            사용자 추가
+          </Button>
+        </div>
         <SearchBar
           searchType={searchType}
           setSearchType={setSearchType}
@@ -55,6 +67,11 @@ function UserManagement() {
           setSearchTerm={setSearchTerm}
         />
         <UserList users={filteredUsers} />
+        <AddUserModal 
+          isOpen={isAddUserModalOpen} 
+          onClose={() => setIsAddUserModalOpen(false)}
+          onAddUser={fetchUsers}
+        />
       </Space>
     </Card>
   );
