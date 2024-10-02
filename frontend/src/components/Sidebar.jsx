@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { UserOutlined, HomeOutlined, AppstoreOutlined, ShopOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { UserOutlined, AppstoreOutlined, ShopOutlined } from '@ant-design/icons';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const { Sider } = Layout;
@@ -20,36 +20,46 @@ const Logo = styled.div`
   align-items: center;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 function Sidebar() {
+  const navigate = useNavigate();
   const location = useLocation();
+
+  const menuItems = [
+    {
+      key: '/',
+      icon: <UserOutlined />,
+      label: '회원 조회',
+    },
+    {
+      key: '/patch',
+      icon: <AppstoreOutlined />,
+      label: '패치 데이터',
+    },
+    {
+      key: '/products',
+      icon: <ShopOutlined />,
+      label: '제품 등록',
+    },
+  ];
+
+  const handleMenuClick = (item) => {
+    navigate(item.key);
+  };
 
   return (
     <StyledSider width={200}>
-      <Link to="/">
-        <Logo>PLUMS</Logo>
-      </Link>
+      <Logo onClick={() => navigate('/')}>PLUMS</Logo>
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={['1']}
         selectedKeys={[location.pathname]}
+        items={menuItems}
+        onClick={handleMenuClick}
         style={{ background: 'transparent' }}
-      >
-        <Menu.Item key="/" icon={<HomeOutlined />}>
-          <Link to="/">Dashboard</Link>
-        </Menu.Item>
-        <Menu.Item key="/users" icon={<UserOutlined />}>
-          <Link to="/">회원 조회</Link>
-        </Menu.Item>
-        <Menu.Item key="/patch" icon={<AppstoreOutlined />}>
-          패치 데이터
-        </Menu.Item>
-        <Menu.Item key="/products" icon={<ShopOutlined />}>
-          제품 등록
-        </Menu.Item>
-      </Menu>
+      />
     </StyledSider>
   );
 }
