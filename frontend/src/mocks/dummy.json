@@ -1,0 +1,100 @@
+{
+    "users": [
+        { 
+            "id": 1, 
+            "name": "Giacomo", 
+            "email": "giacomo@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        },
+        { 
+            "id": 2, 
+            "name": "Marco", 
+            "email": "marco@wire.com", 
+            "password": "a12345678!",
+            "isActive": false,
+            "isAdmin": false
+        },
+        { 
+            "id": 3, 
+            "name": "Mariah", 
+            "email": "mariah@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": true
+        },
+        { 
+            "id": 4, 
+            "name": "Valerie", 
+            "email": "valerie@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        },
+        { 
+            "id": 5, 
+            "name": "Guilizoni", 
+            "email": "giacomo@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        },
+        { 
+            "id": 6, 
+            "name": "Botton", 
+            "email": "marco@wire.com", 
+            "password": "a12345678!",
+            "isActive": false,
+            "isAdmin": false
+        },
+        { 
+            "id": 7, 
+            "name": "Maclachan", 
+            "email": "mariah@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": true
+        },
+        { 
+            "id": 8, 
+            "name": "berty", 
+            "email": "valerie@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        },
+        { 
+            "id": 9, 
+            "name": "Giacom", 
+            "email": "giacomo@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        },
+        { 
+            "id": 10, 
+            "name": "Marton", 
+            "email": "marco@wire.com", 
+            "password": "a12345678!",
+            "isActive": false,
+            "isAdmin": false
+        },
+        { 
+            "id": 11, 
+            "name": "Marchlan", 
+            "email": "mariah@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": true
+        },
+        { 
+            "id": 12, 
+            "name": "Valrty", 
+            "email": "valerie@wire.com", 
+            "password": "a12345678!",
+            "isActive": true,
+            "isAdmin": false
+        }
+    ]
+}

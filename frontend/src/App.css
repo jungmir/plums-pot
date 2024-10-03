@@ -1,42 +1,74 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 500;
+}
+.ant-menu-item-selected {
+  background-color: #4f6f52 !important;
+  color: #fff !important;
+}
+.custom-select .ant-select-open,
+.custom-table .ant-table-thead > tr > th {
+  background-color: #e1ecdc;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.ant-form-item-explain-error {
+  font-size: 11px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-input:hover, 
+.ant-input:focus,
+/* .ant-input-status-success, */
+.ant-input-affix-wrapper:focus,
+.custom-table .ant-pagination-item,
+.custom-select .ant-select-selector,
+.custom-select .ant-select-selector:hover,
+.custom-select .ant-select-selector:focus,
+.custom-select .ant-select-focused .ant-select-selector {
+  border-color: #4f6f52 !important;
+  box-shadow: none;
+}
+.ant-input.ant-input-status-error:hover,
+.ant-input.ant-input-status-error:focus {
+  border-color: #ff4d4f !important;
+}
+.custom-table .ant-pagination-item {
+  color:#4f6f52;
+}
+.ant-btn:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
+}
+.ant-btn-primary {
+  background-color: #4f6f52;
+}
+.ant-btn-primary:hover {
+  background-color: #fff !important;
+  color: #4f6f52 !important;
+}
+.ant-btn-default:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
+}
+.ant-select:hover {
+  color: #4f6f52 !important;
+  border-color: #4f6f52 !important;
+}
+.custom-switch {
+  background-color: #d9d9d9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.custom-switch.ant-switch-checked {
+  background-color: #86a789;
+}
+.custom-switch.ant-switch-checked:hover {
+  background-color: #86a789 !important; 
 }
 
-.card {
-  padding: 2em;
+.primary--color {
+  color: #4f6f52 !important;
 }
-
-.read-the-docs {
-  color: #888;
+.secondary--color {
+  color: #86a789 !important;
 }
